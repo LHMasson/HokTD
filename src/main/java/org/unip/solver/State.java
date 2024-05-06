@@ -61,13 +61,8 @@ public class State {
         }
 
         for(Action action: this.actions) {
-            result.append(action).append(", ");
+            result.append(action);
         }
-
-        if (!result.isEmpty() && result.charAt(result.length() - 2) == ',') {
-            result.deleteCharAt(result.length() - 2);
-        }
-
         return result.toString();
     }
 }
