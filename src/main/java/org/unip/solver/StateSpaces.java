@@ -11,32 +11,43 @@ public class StateSpaces {
     State initialState;
     OpenStates openStates;
     Set<State> closedStates;
+    Set<State> solvedStates;
 
     public StateSpaces(State initialState, OpenStates openStates) {
-        this.initialState = initialState;
+        this.initialState = initialState.initialize();
         this.openStates = openStates;
         openStates.push(this.initialState);
         closedStates = new HashSet<>();
+        solvedStates = new HashSet<>();
     }
 
     public State solve(){
-
+        State bestSolution;
+        Collection<State> generatedStates = null;
         while(openStates.size()>0) {
             State lastTestedState = openStates.pop();
             if(lastTestedState.isGoal()) {
-                System.out.println("-------------ENCONTROU SOLUÇÃO----------");
-                return lastTestedState;
+                solvedStates.add(lastTestedState);
+            } else {
+                generatedStates = lastTestedState.generateStates();
             }
-            System.out.println(lastTestedState.toString());
             closedStates.add(lastTestedState);
-            Collection<State> generatedStates = lastTestedState.generateStates();
             for(State generated: generatedStates) {
-                if(!closedStates.contains(generated))
+                if(!closedStates.contains(generated)){
                     openStates.push(generated);
+                }
             }
         }
+        if(this.solvedStates != null){
+            bestSolution = this.solvedStates.iterator().next();
+            for(State solved: this.solvedStates) {
+               if (solved.board.sufferedPoints >= bestSolution.board.sufferedPoints){
+                   bestSolution = solved.deepCopy();
+               }
+            }
+            return bestSolution;
+        }
         System.out.println("NÃO ENCONTROU SOLUÇÃO");
-
         return null;
     }
 }

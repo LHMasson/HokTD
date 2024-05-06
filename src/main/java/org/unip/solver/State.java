@@ -22,6 +22,10 @@ public class State {
         this.actions = actions;
     }
 
+    protected State initialize(){
+        this.board.initialize();
+        return this;
+    }
     public boolean isGoal(){
         return Integer.parseInt(board.pieces[board.matrixScale-1][board.matrixScale-1]) == 1;
     }

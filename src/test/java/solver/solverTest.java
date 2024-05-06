@@ -7,9 +7,9 @@ import org.unip.solver.State;
 import org.unip.solver.StateSpaces;
 public class solverTest {
     public static void main(String[] args) {
-        Board board = InputInstance.getInstance("src/test/java/files/inst03.in");
+        Board board = InputInstance.getInstance("src/test/java/files/instg07.in");
         State initialState = new State(board);
-            StateSpaces stateSpaces = new StateSpaces(initialState, new Pile());
+        StateSpaces stateSpaces = new StateSpaces(initialState, new Pile());
         State solution = stateSpaces.solve();
         System.out.println(solution.toString());
     }
