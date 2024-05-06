@@ -22,14 +22,27 @@ public class StateSpaces {
     }
 
     public State solve(){
-        State bestSolution;
+        State bestSolution = null;
         Collection<State> generatedStates = null;
         while(openStates.size()>0) {
             State lastTestedState = openStates.pop();
+            System.out.println(lastTestedState.toString());
             if(lastTestedState.isGoal()) {
-                solvedStates.add(lastTestedState);
+                if(lastTestedState.board.sufferedPoints == 0) {
+                    return lastTestedState;
+                } else if (bestSolution == null) {
+                    bestSolution = lastTestedState.deepCopy();
+                } else {
+                    if(lastTestedState.board.sufferedPoints > bestSolution.board.sufferedPoints) {
+                        bestSolution = lastTestedState.deepCopy();
+                    }
+                }
             } else {
-                generatedStates = lastTestedState.generateStates();
+                if(bestSolution != null && lastTestedState.board.sufferedPoints <= bestSolution.board.sufferedPoints){
+                    closedStates.add(lastTestedState);
+                } else {
+                    generatedStates = lastTestedState.generateStates();
+                }
             }
             closedStates.add(lastTestedState);
             for(State generated: generatedStates) {
@@ -37,15 +50,6 @@ public class StateSpaces {
                     openStates.push(generated);
                 }
             }
-        }
-        if(this.solvedStates != null){
-            bestSolution = this.solvedStates.iterator().next();
-            for(State solved: this.solvedStates) {
-               if (solved.board.sufferedPoints >= bestSolution.board.sufferedPoints){
-                   bestSolution = solved.deepCopy();
-               }
-            }
-            return bestSolution;
         }
         System.out.println("NÃO ENCONTROU SOLUÇÃO");
         return null;
