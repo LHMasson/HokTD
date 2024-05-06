@@ -2,6 +2,7 @@ package org.unip.solver;
 
 import org.unip.entity.structures.OpenStates;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class StateSpaces {
         closedStates = new HashSet<>();
     }
 
-    public State solve() {
+    public State solve(){
 
         while(openStates.size()>0) {
             State lastTestedState = openStates.pop();
@@ -26,7 +27,7 @@ public class StateSpaces {
                 System.out.println("-------------ENCONTROU SOLUÇÃO----------");
                 return lastTestedState;
             }
-            //System.out.println("Action Tested: " + );
+            System.out.println(lastTestedState.toString());
             closedStates.add(lastTestedState);
             Collection<State> generatedStates = lastTestedState.generateStates();
             for(State generated: generatedStates) {
