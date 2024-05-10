@@ -1,3 +1,3 @@
 package org.unip.entity;
 
-public enum Action { N, L, O, S }
+public enum Action { N, O, L, S }

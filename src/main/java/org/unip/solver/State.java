@@ -10,7 +10,7 @@ import java.util.List;
 
 public class State {
     public Board board;
-    List<Action> actions;
+    public List<Action> actions;
 
     public State(Board board){
         this.board = board;
@@ -56,6 +56,7 @@ public class State {
     public String toString() {
         StringBuilder result = new StringBuilder("\n");
         result.append("Nível: ").append(this.actions.size()).append("\n");
+        result.append("Dano: ").append(this.board.sufferedPoints).append("\n");
         for(int i=0; i < this.board.matrixScale; i++) {
             result.append("[");
             for(int j=0; j < this.board.matrixScale; j++){

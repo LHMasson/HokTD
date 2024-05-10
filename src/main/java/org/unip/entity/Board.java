@@ -72,12 +72,12 @@ public class Board {
                 newPosition = new Position(currentPosition.line-1, currentPosition.column);
                 this.countSufferedPoints(newPosition);
                 break;
-            case S:
-                newPosition = new Position(currentPosition.line+1, currentPosition.column);
-                this.countSufferedPoints(newPosition);
-                break;
             case L:
                 newPosition = new Position(currentPosition.line, currentPosition.column+1);
+                this.countSufferedPoints(newPosition);
+                break;
+            case S:
+                newPosition = new Position(currentPosition.line+1, currentPosition.column);
                 this.countSufferedPoints(newPosition);
                 break;
             case O:

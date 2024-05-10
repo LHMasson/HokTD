@@ -2,7 +2,6 @@ package org.unip.solver;
 
 import org.unip.entity.structures.OpenStates;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,9 +25,9 @@ public class StateSpaces {
         Collection<State> generatedStates = null;
         while(openStates.size()>0) {
             State lastTestedState = openStates.pop();
-            System.out.println(lastTestedState.toString());
             if(lastTestedState.isGoal()) {
                 if(lastTestedState.board.sufferedPoints == 0) {
+                    System.out.println(lastTestedState.toString());
                     return lastTestedState;
                 } else if (bestSolution == null) {
                     bestSolution = lastTestedState.deepCopy();
@@ -51,7 +50,7 @@ public class StateSpaces {
                 }
             }
         }
-        System.out.println("NÃO ENCONTROU SOLUÇÃO");
-        return null;
+        System.out.println(bestSolution.toString());
+        return bestSolution;
     }
 }
