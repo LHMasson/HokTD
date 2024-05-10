@@ -10,14 +10,12 @@ public class StateSpaces {
     State initialState;
     OpenStates openStates;
     Set<State> closedStates;
-    Set<State> solvedStates;
 
     public StateSpaces(State initialState, OpenStates openStates) {
         this.initialState = initialState.initialize();
         this.openStates = openStates;
         openStates.push(this.initialState);
         closedStates = new HashSet<>();
-        solvedStates = new HashSet<>();
     }
 
     public State solve(){
